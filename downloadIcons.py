@@ -44,4 +44,4 @@ with open("cbpsdb.csv", encoding="utf-8") as csv_file:
     
 print("Processed " + str(line_count) + " lines.")
 
-make_archive("icons.zip", 'zip', "icons")
+make_archive("icons", 'zip', "icons")

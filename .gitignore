@@ -1,4 +1,5 @@
 *
 !.gitignore
-/downloadicons.py
-/README.md
+!/downloadicons.py
+!/README.md
+!/icons.zip
