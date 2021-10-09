@@ -1,2 +1,4 @@
-/icons
-/cbpsdb.csv
+*
+!.gitignore
+/downloadicons.py
+/README.md
