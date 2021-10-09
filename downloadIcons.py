@@ -1,5 +1,5 @@
 import csv
-from os import mkdir
+from os import mkdir, remove
 import wget
 import glob
 from shutil import move, make_archive
@@ -8,6 +8,11 @@ try:
     mkdir("icons")
 except: 
     print("Cant make dir (already exists?)")
+
+try:
+    remove("cbpsdb.csv")
+except:
+    print("Couldn't delete old file.....probably wasn't there")
 
 try:
     wget.download("https://raw.githubusercontent.com/KuromeSan/cbps-db/master/cbpsdb.csv", "cbpsdb.csv")
