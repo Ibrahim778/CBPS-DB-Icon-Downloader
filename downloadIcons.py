@@ -3,6 +3,7 @@ from os import mkdir, remove
 import wget
 import glob
 from shutil import move, make_archive
+from time import sleep
 
 try:
     mkdir("icons")
@@ -37,6 +38,7 @@ with open("cbpsdb.csv", encoding="utf-8") as csv_file:
         if line_count > 1:
             if(row[3] != "None"):
                 downloadImage(row[3], str(row[0]))
+                sleep(1)
 
             line_count += 1
         else:
