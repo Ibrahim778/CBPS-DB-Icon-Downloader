@@ -1,8 +1,10 @@
 import csv
 from os import mkdir, remove
+import shlex
 import wget
 import glob
 from shutil import move, make_archive
+import subprocess
 from time import sleep
 
 try:
@@ -25,7 +27,10 @@ def downloadImage(url, id):
     print("")
     print("Downloading from " + url)
     try:
-        wget.download(url)
+        command = "curl " + url + " -O icon.png"
+        args = shlex.split(command)
+        process = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = process.communicate()
         move(glob.glob("*.png")[0], "icons/" + id + ".png")
     except:
         print("Failed")
