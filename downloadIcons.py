@@ -1,16 +1,18 @@
 import csv
 from os import mkdir, remove
+from os.path import isdir
+from shutil import rmtree
 import shlex
 import wget
-import glob
-from shutil import move, make_archive
+from shutil import make_archive
 import subprocess
-from time import sleep
 
 try:
+    if(isdir("icons")):
+        rmtree("icons")
     mkdir("icons")
 except: 
-    print("Cant make dir (already exists?)")
+    print("Cant re-make dir (already exists?)")
 
 try:
     remove("cbpsdb.csv")
@@ -27,11 +29,10 @@ def downloadImage(url, id):
     print("")
     print("Downloading from " + url)
     try:
-        command = "curl " + url + " -O icon.png"
+        command = "curl " + url + f" -o icons/{id}.png"
         args = shlex.split(command)
         process = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
-        move(glob.glob("*.png")[0], "icons/" + id + ".png")
     except:
         print("Failed")
     
@@ -43,7 +44,6 @@ with open("cbpsdb.csv", encoding="utf-8") as csv_file:
         if line_count > 1:
             if(row[3] != "None"):
                 downloadImage(row[3], str(row[0]))
-                sleep(1)
 
             line_count += 1
         else:
